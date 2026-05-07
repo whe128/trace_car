@@ -1,0 +1,412 @@
+<?xml version="1.0"?>
+<robot name="car_gazebo">
+
+<link name="base_link">
+  <visual>
+   <geometry>
+    <box size="0.01 0.01 0.001" />
+   </geometry>
+   <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+</link>
+
+
+<link name="body_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/assembly_base.dae"  scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.005" rpy="0 0 0" />
+    <geometry>
+      <box size="0.001 0.001 0.001" />
+    </geometry>
+  </collision>
+
+  <inertial>
+    <mass value="0.5"/>
+    <inertia
+      ixx="0.0035"
+      iyy="0.0060"
+      izz="0.0083"
+      ixy="0.0"
+      ixz="0.0"
+      iyz="0.0"/>
+    </inertial>
+</link>
+
+<joint name = "base_to_body" type = "fixed">
+  <parent link = "base_link"/>
+  <child link = "body_link"/>
+  <origin rpy="0 0 0" xyz="0 0 0"/>
+</joint>
+
+
+<link name="wheel_L_back_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/assembly_wheel_L_back.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length="0.027" radius="0.032"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2.5</mu>
+          <mu2>2.5</mu2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+  <inertial>
+    <mass value="0.02"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="wheel_L_back_to_body" type="continuous">
+  <origin xyz="-0.1095 0.0765 0.025" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="wheel_L_back_link"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+
+
+<link name="wheel_R_back_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/assembly_wheel_R_back.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length="0.027" radius="0.032"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2.5</mu>
+          <mu2>2.5</mu2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+  <inertial>
+    <mass value="0.02"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="wheel_R_back_to_body" type="continuous">
+  <origin xyz="-0.1095 -0.0765 0.025" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="wheel_R_back_link"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+
+<link name="small_gear_L_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/small_gear.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "1.5708 0.19 0" xyz = "0 0 0"/>
+  </visual>
+  <inertial>
+    <mass value="0.002"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="small_gear_L_to_body" type="fixed">
+  <origin xyz="-0.0825 0.058 0.025" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="small_gear_L_link"/>
+</joint>
+
+<link name="small_gear_R_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/small_gear.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "1.5708 0.19 0" xyz = "0 0 0"/>
+  </visual>
+  <inertial>
+    <mass value="0.002"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="small_gear_R_to_body" type="fixed">
+  <origin xyz="-0.0825 -0.058 0.025" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="small_gear_R_link"/>
+</joint>
+
+
+<link name="axis_L_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/axis_L.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+  <inertial>
+    <mass value="0.002"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="axis_L_to_body" type="revolute">
+  <origin xyz="0.11625 0.0765 0.025" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="axis_L_link"/>
+  <axis xyz="0 0 1"/>
+  <!-- 0.5236 rad = 30 degree, 0.6981  40degree -->
+  <limit lower="-0.6981" upper="0.6981" effort="10" velocity="100"/>
+</joint>
+
+<link name="wheel_L_front_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/assembly_wheel_L_front.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length="0.027" radius="0.032"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2.5</mu>
+          <mu2>2.5</mu2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+  <inertial>
+    <mass value="0.02"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="wheel_L_front_to_axis_L" type="continuous">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="axis_L_link"/>
+  <child link="wheel_L_front_link"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<link name="axis_R_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/axis_R.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 3.14159" xyz = "0 0 0"/>
+  </visual>
+  <inertial>
+    <mass value="0.002"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="axis_R_to_body" type="revolute">
+  <origin xyz="0.11625 -0.0765 0.025" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="axis_R_link"/>
+  <axis xyz="0 0 1"/>
+  <!-- 0.5236 rad = 30 degree,0.6981 rad 40 degree -->
+  <limit lower="-0.6981" upper="0.6981" effort="10" velocity="100"/>
+</joint>
+
+<link name="wheel_R_front_link">
+  <visual>
+    <geometry>
+      <mesh filename="file:///root/ros2_ws/src/trace_car/meshes/assembly_wheel_R_front.dae" scale="1 1 1"/>
+    </geometry>
+    <origin rpy = "0 0 0" xyz = "0 0 0"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length="0.027" radius="0.032"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>2.5</mu>
+          <mu2>2.5</mu2>
+        </ode>
+      </friction>
+    </surface>
+  </collision>
+  <inertial>
+    <mass value="0.02"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+  </inertial>
+</link>
+<joint name="wheel_R_front_to_axis_R" type="continuous">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="axis_R_link"/>
+  <child link="wheel_R_front_link"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<!-- link for ccd camera -->
+<!-- front to body center 175 mm, ccd to front 175 - 45 = 130 mm, ccd to body center 175 - 45 = 130 mm -->
+<!-- height to ground 224 + 7 = 231 -->
+<!-- front see 400mm, arctan(231/(130 + 400)) = 0.411rad-->
+<link name="ccd_close_frame"/>
+<joint name="ccd_close_to_body" type="fixed">
+    <origin xyz="0.045 0 0.224" rpy="0 0.43 0" />
+    <parent link="body_link" />
+    <child link="ccd_close_frame" />
+</joint>
+
+<!-- ccd to front = 175 - 48 = 127 -->
+<!-- height to ground 169 + 7 = 176-->
+<!-- front see 800, arctan(176/(127 + 800)) = 0.1876 -->
+<link name = "ccd_far_frame"/>
+<joint name="ccd_far_to_body" type="fixed">
+    <origin xyz="0.048 0 0.169" rpy="0 0.19 0" />
+    <parent link="body_link" />
+    <child link="ccd_far_frame"/>
+</joint>
+
+
+<ros2_control name="car_gazebo_system" type="system">
+  <hardware>
+    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+  </hardware>
+
+  <!-- left wheel velocity -->
+  <joint name="wheel_L_back_to_body">
+    <command_interface name="velocity">
+      <param name="min">-500</param>
+      <param name="max">500</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+
+  <joint name="wheel_R_back_to_body">
+    <command_interface name="velocity">
+      <param name="min">-500</param>
+      <param name="max">500</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+
+  <!-- steer：position control -->
+  <!-- 0.5236 rad = 30 degree, more bigger than 30 degree, for better control performance -->
+  <joint name="axis_L_to_body">
+    <command_interface name="position">
+      <param name="min">-0.7</param>
+      <param name="max">0.7</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+
+  <joint name="axis_R_to_body">
+    <command_interface name="position">
+      <param name="min">-0.7</param>
+      <param name="max">0.7</param>
+    </command_interface>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+</ros2_control>
+
+<gazebo>
+  <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+    <parameters>$(find trace_car)/config/controllers.yaml</parameters>
+  </plugin>
+</gazebo>
+
+<gazebo reference="ccd_close_frame">
+    <sensor type="camera" name="ccd_close_sensor">
+        <always_on>true</always_on>
+        <update_rate>100.0</update_rate>
+        <camera name="ccd_close">
+          <horizontal_fov>1.2</horizontal_fov>
+          <image>
+              <width>128</width>
+              <height>1</height>
+              <format>L8</format>
+          </image>
+          <clip>
+              <near>0.2</near>
+              <far>10.0</far>
+          </clip>
+          <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="ccd_close_controller" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>ccd</namespace>
+            <remapping>image_raw:=image_raw</remapping>
+            <remapping>camera_info:=camera_info</remapping>
+          </ros>
+          <camera_name>ccd_close</camera_name>
+          <frame_name>ccd_close_frame</frame_name>
+
+          <hack_baseline>0.1</hack_baseline>
+        </plugin>
+    </sensor>
+</gazebo>
+
+
+<gazebo reference="ccd_far_frame">
+    <sensor type="camera" name="ccd_far_sensor">
+        <always_on>true</always_on>
+        <update_rate>100.0</update_rate>
+        <camera name="ccd_far">
+          <horizontal_fov>1.2</horizontal_fov>
+          <image>
+              <width>128</width>
+              <height>1</height>
+              <format>L8</format>
+          </image>
+          <clip>
+              <near>0.2</near>
+              <far>10.0</far>
+          </clip>
+          <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="ccd_far_controller" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>ccd</namespace>
+            <remapping>image_raw:=image_raw</remapping>
+            <remapping>camera_info:=camera_info</remapping>
+          </ros>
+          <camera_name>ccd_far</camera_name>
+          <frame_name>ccd_far_frame</frame_name>
+
+          <hack_baseline>0.1</hack_baseline>
+        </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

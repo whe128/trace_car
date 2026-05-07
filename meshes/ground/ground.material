@@ -1,0 +1,14 @@
+material GroundTrack
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture ground.png
+        scale 1 1
+      }
+    }
+  }
+}
