@@ -32,7 +32,7 @@ constexpr bool FIND_EDGE_FROM_CENTER = false;
 constexpr int    BLACK_THRESHOLD         = 15;
 constexpr int    WHITE_THRESHOLD         = 225;
 constexpr int    STOP_LIGHT_THRESHOLD    = 50;
-constexpr int    STRAIGHT_LIGHT_THRESHOLD = 16;
+constexpr int    STRAIGHT_CENTER_ERROR_THRESHOLD = 16;
 
 constexpr double MIN_LIGHT_WIDTH_RATIO   = 0.08;
 constexpr double STOP_LINE_WIDTH_RATIO   = 0.35;

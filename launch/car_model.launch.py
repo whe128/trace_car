@@ -57,7 +57,7 @@ def generate_launch_description():
         package="rviz2",
         executable="rviz2",
         name="rviz2",
-        #arguments=['-d', [os.path.join(get_package_share_directory('trace_car'), 'rviz', 'trace.rviz')]]
+        arguments=['-d', [os.path.join(get_package_share_directory('trace_car'), 'rviz', 'trace.rviz')]]
     )
 
     return LaunchDescription(

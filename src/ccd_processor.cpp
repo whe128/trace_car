@@ -9,7 +9,7 @@ CCDProcessor::CCDProcessor(rclcpp::Node* node){
     node_->declare_parameter("BLACK_THRESHOLD",          BLACK_THRESHOLD);
     node_->declare_parameter("WHITE_THRESHOLD",          WHITE_THRESHOLD);
     node_->declare_parameter("STOP_LIGHT_THRESHOLD",     STOP_LIGHT_THRESHOLD);
-    node_->declare_parameter("STRAIGHT_LIGHT_THRESHOLD", STRAIGHT_LIGHT_THRESHOLD);
+    node_->declare_parameter("STRAIGHT_CENTER_ERROR_THRESHOLD", STRAIGHT_CENTER_ERROR_THRESHOLD);
     node_->declare_parameter("STOP_LINE_WIDTH_RATIO",    STOP_LINE_WIDTH_RATIO);
     node_->declare_parameter("EDGE_LIGHT_THRESHOLD_RATIO",  EDGE_LIGHT_THRESHOLD_RATIO);
 
@@ -467,7 +467,7 @@ void CCDProcessor::perception_analyse()
     int    stop_light_threshold     = node_->get_parameter("STOP_LIGHT_THRESHOLD").as_int();
     int    black_threshold          = node_->get_parameter("BLACK_THRESHOLD").as_int();
     int    white_threshold          = node_->get_parameter("WHITE_THRESHOLD").as_int();
-    int    straight_light_threshold = node_->get_parameter("STRAIGHT_LIGHT_THRESHOLD").as_int();
+    int    straight_center_error_threshold = node_->get_parameter("STRAIGHT_CENTER_ERROR_THRESHOLD").as_int();
 
     int left_edge    = left_edge_close;
     int right_edge   = right_edge_close;
@@ -487,8 +487,8 @@ void CCDProcessor::perception_analyse()
             road_type == Perception::STRAIGHT
             || road_type == Perception::TURN
             || (
-                std::abs(center_mean_close - CCD_CENTER) < straight_light_threshold
-                && std::abs(center_mean_far - CCD_CENTER) < straight_light_threshold
+                std::abs(center_mean_close - CCD_CENTER) < straight_center_error_threshold
+                && std::abs(center_mean_far - CCD_CENTER) < straight_center_error_threshold
             )
         )
     ){
@@ -529,8 +529,8 @@ void CCDProcessor::perception_analyse()
         }
     }
     // ---- STRAIGHT ----
-    else if ( std::abs(center - CCD_CENTER) < straight_light_threshold
-        && std::abs(center_mean_far - CCD_CENTER) < straight_light_threshold
+    else if ( std::abs(center - CCD_CENTER) < straight_center_error_threshold
+        && std::abs(center_mean_far - CCD_CENTER) < straight_center_error_threshold
     ) {
         straight_count_++;
         turn_count_ = 0;

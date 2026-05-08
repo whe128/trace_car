@@ -10,7 +10,7 @@ MIN_LIGHT_WIDTH_RATIO = 0.08
 BLACK_THRESHOLD = 15
 WHITE_THRESHOLD = 215
 STOP_LIGHT_THRESHOLD = 50
-STRAIGHT_LIGHT_THRESHOLD = 16
+STRAIGHT_CENTER_ERROR_THRESHOLD = 16
 STOP_LINE_WIDTH_RATIO = 0.35
 EDGE_LIGHT_THRESHOLD_RATIO = 0.25
 
@@ -25,7 +25,7 @@ STRAIGHT_COUNT_TRIGGER = 8
 TURN_COUNT_TRIGGER = 4
 CROSS_COUNT_TRIGGER = 4
 STOP_COUNT_TRIGGER = 2
-BALCK_COUNT_TRIGGER = 4
+BLACK_COUNT_TRIGGER = 4
 
 
 FIND_EDGE_FROM_CENTER = False
@@ -40,7 +40,7 @@ class CCDProcessor():
         node.declare_parameter('BLACK_THRESHOLD', BLACK_THRESHOLD)
         node.declare_parameter('WHITE_THRESHOLD', WHITE_THRESHOLD)
         node.declare_parameter('STOP_LIGHT_THRESHOLD', STOP_LIGHT_THRESHOLD)
-        node.declare_parameter('STRAIGHT_LIGHT_THRESHOLD', STRAIGHT_LIGHT_THRESHOLD)
+        node.declare_parameter('STRAIGHT_CENTER_ERROR_THRESHOLD', STRAIGHT_CENTER_ERROR_THRESHOLD)
         node.declare_parameter('STOP_LINE_WIDTH_RATIO', STOP_LINE_WIDTH_RATIO)
         node.declare_parameter('EDGE_LIGHT_THRESHOLD_RATIO', EDGE_LIGHT_THRESHOLD_RATIO)
 
@@ -400,7 +400,7 @@ class CCDProcessor():
         stop_light_threshold = self.node.get_parameter('STOP_LIGHT_THRESHOLD').value
         black_threshold = self.node.get_parameter('BLACK_THRESHOLD').value
         white_threshold = self.node.get_parameter('WHITE_THRESHOLD').value
-        straight_light_threshold = self.node.get_parameter('STRAIGHT_LIGHT_THRESHOLD').value
+        straight_center_error_threshold = self.node.get_parameter('STRAIGHT_CENTER_ERROR_THRESHOLD').value
 
 
         left_edge = self.left_edge_close
@@ -413,9 +413,6 @@ class CCDProcessor():
         # road type in assignment, new road type
 
         # see the stop line, the width less than original width
-
-
-
         if right_edge - left_edge < stop_line_width_ratio * trace_width \
             and left_edge >= 0 and right_edge >= 0 and trace_width > 0 \
             and avg_brightness < stop_light_threshold\
@@ -424,8 +421,8 @@ class CCDProcessor():
                 or self.road_type == Perception.STOP \
                 or (
                     # if not stable of straight, still consider as stop
-                    abs(self.center_mean_close - CCD_CENTER) < straight_light_threshold  \
-                    and abs(self.center_mean_far - CCD_CENTER) < straight_light_threshold \
+                    abs(self.center_mean_close - CCD_CENTER) < straight_center_error_threshold  \
+                    and abs(self.center_mean_far - CCD_CENTER) < straight_center_error_threshold \
                 )):
             self.stop_count += 1
             self.straight_count = 0
@@ -441,7 +438,7 @@ class CCDProcessor():
             self.turn_count = 0
             self.cross_count = 0
             self.stop_count = 0
-            if self.black_count >= BALCK_COUNT_TRIGGER:
+            if self.black_count >= BLACK_COUNT_TRIGGER:
                 self.road_type = Perception.BLACK
 
         elif avg_brightness > white_threshold or (left_edge < 0 and right_edge < 0 and avg_brightness > 0.8 * white_threshold):
@@ -455,7 +452,7 @@ class CCDProcessor():
                 self.road_type = Perception.CROSS
 
 
-        elif abs(center - CCD_CENTER) < straight_light_threshold and abs(self.center_mean_far - CCD_CENTER) < straight_light_threshold:
+        elif abs(center - CCD_CENTER) < straight_center_error_threshold and abs(self.center_mean_far - CCD_CENTER) < straight_center_error_threshold:
             # straight road
             self.straight_count += 1
             self.turn_count = 0

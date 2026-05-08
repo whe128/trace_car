@@ -968,7 +968,7 @@ class CarDashboard(tk.Tk):
             ("BLACK_THRESHOLD",             "int",      "Black Threshold",             0, 255, 15,     0),
             ("WHITE_THRESHOLD",             "int",      "White Threshold",             0, 255, 225,    0),
             ("STOP_LIGHT_THRESHOLD",        "int",      "Stop Light Threshold",        0, 255, 50,     0),
-            ("STRAIGHT_LIGHT_THRESHOLD",    "int",    "Straight Light Threshold",      0, 255, 16,     0),
+            ("STRAIGHT_CENTER_ERROR_THRESHOLD",   "int", "Straight center error Threshold",     0, 255, 16,     0),
             ("MIN_LIGHT_WIDTH_RATIO",       "float",    "Min Light Width Ratio",       0, 1,   0.08,   2),
             ("STOP_LINE_WIDTH_RATIO",       "float",    "Stop Line Width Ratio",       0, 1,   0.35,   2),
             ("EDGE_LIGHT_THRESHOLD_RATIO",  "float",    "Edge Light Threshold Ratio",  0, 1,   0.25,   2),
