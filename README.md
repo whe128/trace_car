@@ -1,4 +1,23 @@
 # trace_car
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/c854146b-1831-4464-9839-9ac7ea32f01d" width="400"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/9023b229-7792-489a-9ee2-273ca64052ec" width="400"/>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/be513d4b-58ba-449d-951a-22ada518f548" width="400"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/3bc72f6e-9ed5-4e6a-a96e-3f8de64ada06" width="400"/>
+    </td>
+  </tr>
+</table>
 
 `trace_car` is a ROS 2 + Gazebo line-tracing car project built with `colcon` and `CMake`, and implemented with both C++ and Python. It uses CCD-style perception, a controller state machine, and a Gazebo camera/control plugin to simulate an autonomous car following a road map in a closed track.
 
