@@ -1,8 +1,8 @@
 # 🚗 Trace Car — ROS2 Autonomous Line-Following Simulation
 
 A ROS2-based autonomous trace-car simulation built in Gazebo, featuring a custom race track and vehicle model.
-
-[![Trace Car Demo_video](https://img.youtube.com/vi/ZECHB04fXC4/0.jpg)](https://www.youtube.com/watch?v=ZECHB04fXC4)
+## 📺 Demo
+[![Trace Car Demo](https://img.youtube.com/vi/a4iX7MZsy_s/0.jpg)](https://youtu.be/a4iX7MZsy_s)
 
 <table>
   <tr>
@@ -24,6 +24,7 @@ A ROS2-based autonomous trace-car simulation built in Gazebo, featuring a custom
   </tr>
 </table>
 
+## Introduction
 `trace_car` is a ROS 2 + Gazebo line-tracing car project built with `colcon` and `CMake`, and implemented with both C++ and Python. It uses CCD-style perception, a controller state machine, and a Gazebo camera/control plugin to simulate an autonomous car following a road map in a closed track.
 
 The project is centered on these goals:
