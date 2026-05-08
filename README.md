@@ -1,4 +1,9 @@
-# trace_car
+# 🚗 Trace Car — ROS2 Autonomous Line-Following Simulation
+
+A ROS2-based autonomous trace-car simulation built in Gazebo, featuring a custom race track and vehicle model.
+
+[![Trace Car Demo_video](https://img.youtube.com/vi/ZECHB04fXC4/0.jpg)](https://www.youtube.com/watch?v=ZECHB04fXC4)
+
 <table>
   <tr>
     <td>
