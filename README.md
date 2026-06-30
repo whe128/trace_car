@@ -14,7 +14,7 @@ A ROS2-based autonomous trace-car simulation built in Gazebo, featuring a custom
     </tr>
   </table>
 
-  <a href="https://www.youtube.com/watch?v=a4iX7MZsy_s">[video]</a>
+  <a href="https://www.youtube.com/watch?v=a4iX7MZsy_s">[Demo Video]</a>
 </div>
 
 ## Introduction
